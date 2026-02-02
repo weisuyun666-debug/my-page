@@ -1,0 +1,610 @@
+!doctype html
+html lang=zh-CN
+head
+  meta charset=utf-8 
+  meta name=viewport content=width=device-width,initial-scale=1 
+  title沙特主要铜产品需求企业分布title
+  style
+    root{
+      --bg0#060816;
+      --bg1#0b1030;
+      --card rgba(255,255,255,.06);
+      --card2 rgba(255,255,255,.09);
+      --stroke rgba(255,255,255,.16);
+      --text rgba(255,255,255,.92);
+      --muted rgba(255,255,255,.62);
+
+      --glow #55d6ff;
+      --glow2#8b5cff;
+      --ok#53ffb4;
+      --warn#ffd166;
+    }
+
+    { box-sizingborder-box; }
+    html,body{ height100%; }
+    body{
+      margin0;
+      font-family ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, PingFang SC, Microsoft YaHei, sans-serif;
+      color var(--text);
+      background
+        radial-gradient(1200px 700px at 20% 15%, rgba(85,214,255,.18), transparent 55%),
+        radial-gradient(1000px 600px at 80% 25%, rgba(139,92,255,.16), transparent 55%),
+        radial-gradient(900px 600px at 60% 85%, rgba(83,255,180,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflowhidden;
+    }
+
+    .wrap{
+      height100%;
+      displaygrid;
+      grid-template-columns minmax(420px, 1.25fr) minmax(360px, .95fr);
+      gap 18px;
+      padding 18px;
+    }
+
+    .panel{
+      border 1px solid var(--stroke);
+      background linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow 0 10px 40px rgba(0,0,0,.35);
+      border-radius 18px;
+      overflowhidden;
+      positionrelative;
+    }
+
+    .header{
+      padding 16px 18px 10px;
+      displayflex;
+      align-itemsflex-start;
+      justify-contentspace-between;
+      gap 12px;
+    }
+    .title{
+      line-height1.12;
+      font-weight 800;
+      letter-spacing.2px;
+      font-size 18px;
+      margin0 0 6px;
+    }
+    .subtitle{
+      margin0;
+      color var(--muted);
+      font-size 13px;
+      line-height1.35;
+    }
+
+    .chips{
+      displayflex;
+      gap8px;
+      flex-wrapwrap;
+      justify-contentflex-end;
+    }
+    .chip{
+      user-selectnone;
+      font-size 12px;
+      color rgba(255,255,255,.82);
+      border 1px solid rgba(255,255,255,.18);
+      background rgba(255,255,255,.06);
+      padding 8px 10px;
+      border-radius 999px;
+      backdrop-filter blur(10px);
+      displayflex;
+      align-itemscenter;
+      gap8px;
+      white-spacenowrap;
+    }
+    .dot{
+      width8px;height8px;border-radius999px;
+      background var(--glow);
+      box-shadow 0 0 14px rgba(85,214,255,.75);
+    }
+    .dot.purple{ background var(--glow2); box-shadow 0 0 14px rgba(139,92,255,.75); }
+    .dot.green{ background var(--ok); box-shadow 0 0 14px rgba(83,255,180,.70); }
+    .dot.yellow{ background var(--warn); box-shadow 0 0 14px rgba(255,209,102,.65); }
+
+     Map area 
+    .mapArea{
+      height calc(100% - 72px);
+      padding 12px 14px 16px;
+    }
+
+    .mapShell{
+      height100%;
+      border-radius 16px;
+      border 1px solid rgba(255,255,255,.14);
+      background
+        radial-gradient(900px 600px at 40% 20%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(900px 600px at 70% 80%, rgba(85,214,255,.08), transparent 60%),
+        rgba(0,0,0,.14);
+      positionrelative;
+      overflowhidden;
+    }
+
+    .hint{
+      positionabsolute;
+      left 14px;
+      bottom 14px;
+      padding 10px 12px;
+      border-radius 12px;
+      border 1px solid rgba(255,255,255,.14);
+      background rgba(0,0,0,.25);
+      color rgba(255,255,255,.78);
+      font-size 12px;
+      backdrop-filter blur(10px);
+      displayflex;
+      gap10px;
+      align-itemscenter;
+      z-index2;
+    }
+    .kbd{
+      border 1px solid rgba(255,255,255,.22);
+      background rgba(255,255,255,.08);
+      padding 2px 8px;
+      border-radius 8px;
+      color rgba(255,255,255,.85);
+      font-size 12px;
+    }
+
+     Right panel list 
+    .listPanel{
+      padding 14px 14px 18px;
+      height calc(100% - 72px);
+      overflowauto;
+    }
+
+    .section{
+      margin 0 0 10px;
+      color rgba(255,255,255,.86);
+      font-weight 800;
+      font-size 13px;
+      letter-spacing.3px;
+    }
+
+    .card{
+      border 1px solid rgba(255,255,255,.14);
+      background rgba(255,255,255,.06);
+      border-radius 16px;
+      padding 12px 12px;
+      margin-bottom 10px;
+      displaygrid;
+      grid-template-columns 1fr auto;
+      gap 10px;
+      cursorpointer;
+      transition transform .18s ease, border-color .18s ease, background .18s ease;
+      positionrelative;
+      overflowhidden;
+    }
+    .cardhover{
+      transform translateY(-2px);
+      border-color rgba(85,214,255,.28);
+      background rgba(255,255,255,.075);
+    }
+    .card.active{
+      border-color rgba(85,214,255,.55);
+      background rgba(85,214,255,.10);
+      box-shadow 0 0 0 1px rgba(85,214,255,.15) inset, 0 14px 40px rgba(0,0,0,.35);
+    }
+
+    .name{
+      font-weight 900;
+      font-size 13.5px;
+      line-height1.18;
+      margin0 0 6px;
+    }
+    .meta{
+      margin0;
+      color rgba(255,255,255,.70);
+      font-size 12px;
+      line-height1.35;
+    }
+    .badge{
+      align-selfstart;
+      font-size 12px;
+      color rgba(255,255,255,.80);
+      border 1px solid rgba(255,255,255,.16);
+      background rgba(0,0,0,.18);
+      padding 6px 10px;
+      border-radius 999px;
+      displayflex;
+      align-itemscenter;
+      gap8px;
+      white-spacenowrap;
+    }
+
+     SVG styling 
+    svg{ width100%; height100%; displayblock; }
+    .land{
+      fill rgba(255,255,255,.05);
+      stroke rgba(255,255,255,.25);
+      stroke-width 1.6;
+      filter drop-shadow(0 18px 40px rgba(0,0,0,.35));
+    }
+    .grid line{
+      stroke rgba(255,255,255,.06);
+      stroke-width 1;
+    }
+
+    .pin .core{
+      fill rgba(85,214,255,.92);
+      stroke rgba(255,255,255,.60);
+      stroke-width 1.2;
+      filter drop-shadow(0 0 14px rgba(85,214,255,.55));
+    }
+    .pin .ring{
+      fill none;
+      stroke rgba(85,214,255,.45);
+      stroke-width 2;
+      opacity .0;
+    }
+    .pin .label-bg{
+      fill rgba(0,0,0,.35);
+      stroke rgba(255,255,255,.12);
+      stroke-width 1;
+    }
+    .pin text{
+      font-size 12px;
+      fill rgba(255,255,255,.90);
+      dominant-baseline middle;
+    }
+
+     Active spotlight animation 
+    .pin.active .core{
+      fill rgba(83,255,180,.95);
+      filter drop-shadow(0 0 18px rgba(83,255,180,.65));
+    }
+    .pin.active .ring{
+      opacity 1;
+      animation pulse 1.35s ease-out infinite;
+      stroke rgba(83,255,180,.55);
+    }
+
+    @keyframes pulse{
+      0%{ transform scale(0.5); opacity.0; }
+      20%{ opacity.95; }
+      100%{ transform scale(2.8); opacity0; }
+    }
+
+     Top sweep glow 
+    .sweep{
+      positionabsolute;
+      inset-60% -50%;
+      background conic-gradient(from 210deg, transparent, rgba(85,214,255,.08), transparent 35%, rgba(139,92,255,.08), transparent 70%);
+      filter blur(18px);
+      animation spin 10s linear infinite;
+      opacity.7;
+      pointer-eventsnone;
+      z-index0;
+    }
+    @keyframes spin{ to{ transform rotate(360deg); } }
+
+    .legend{
+      positionabsolute;
+      right 14px;
+      bottom 14px;
+      padding 10px 12px;
+      border-radius 12px;
+      border 1px solid rgba(255,255,255,.14);
+      background rgba(0,0,0,.22);
+      color rgba(255,255,255,.78);
+      font-size 12px;
+      backdrop-filter blur(10px);
+      z-index2;
+      displayflex;
+      flex-directioncolumn;
+      gap6px;
+      min-width 170px;
+    }
+    .legend-row{ displayflex; align-itemscenter; gap8px; }
+
+     Responsive 
+    @media (max-width 980px){
+      body{ overflowauto; }
+      .wrap{ grid-template-columns 1fr; }
+      .panel{ min-height 520px; }
+    }
+  style
+head
+
+body
+  div class=wrap
+    !-- Left Map --
+    div class=panel
+      div class=header
+        div
+          h1 class=title沙特阿拉伯主要铜产品需求企业分布图h1
+          p class=subtitle企业基地与工厂（Dammam  Riyadh  Jeddah）快速点亮动画展示p
+        div
+        div class=chips
+          div class=chipspan class=dotspanspan地图点位spandiv
+          div class=chipspan class=dot greenspanspan当前高亮spandiv
+          div class=chipspan class=dot purplespanspan玻璃拟态spandiv
+        div
+      div
+
+      div class=mapArea
+        div class=mapShell id=mapShell
+          div class=sweepdiv
+
+          !-- SVG Map (简化沙特轮廓 + 城市点位) --
+          svg viewBox=0 0 900 620 aria-label=Saudi Arabia map
+            !-- subtle grid --
+            g class=grid opacity=1
+              !-- vertical --
+              line x1=100 y1=0 x2=100 y2=620line
+              line x1=200 y1=0 x2=200 y2=620line
+              line x1=300 y1=0 x2=300 y2=620line
+              line x1=400 y1=0 x2=400 y2=620line
+              line x1=500 y1=0 x2=500 y2=620line
+              line x1=600 y1=0 x2=600 y2=620line
+              line x1=700 y1=0 x2=700 y2=620line
+              line x1=800 y1=0 x2=800 y2=620line
+              !-- horizontal --
+              line x1=0 y1=100 x2=900 y2=100line
+              line x1=0 y1=200 x2=900 y2=200line
+              line x1=0 y1=300 x2=900 y2=300line
+              line x1=0 y1=400 x2=900 y2=400line
+              line x1=0 y1=500 x2=900 y2=500line
+            g
+
+            !-- Saudi outline (stylized  simplified) --
+            path class=land d=
+              M 210 130
+              L 300 90
+              L 395 92
+              L 470 110
+              L 560 120
+              L 650 155
+              L 700 210
+              L 720 260
+              L 705 330
+              L 670 390
+              L 640 460
+              L 585 520
+              L 510 550
+              L 430 560
+              L 355 545
+              L 300 520
+              L 260 475
+              L 230 420
+              L 215 350
+              L 205 290
+              L 190 240
+              L 195 185
+              Z
+             
+
+            !-- Coastline accent --
+            path d=
+              M 650 155
+              L 700 210
+              L 720 260
+              L 705 330
+              L 670 390
+             fill=none stroke=rgba(85,214,255,.22) stroke-width=3 stroke-linecap=round
+
+            !-- City markers coordinates are tuned for the stylized map --
+            !-- Dammam --
+            g class=pin id=pin-dammam transform=translate(640,255)
+              circle class=ring r=10circle
+              circle class=core r=7circle
+              g transform=translate(14,-18)
+                rect class=label-bg x=0 y=0 rx=10 ry=10 width=140 height=26rect
+                text x=10 y=13Dammam（达曼）text
+              g
+            g
+
+            !-- Riyadh --
+            g class=pin id=pin-riyadh transform=translate(500,290)
+              circle class=ring r=10circle
+              circle class=core r=7circle
+              g transform=translate(14,-18)
+                rect class=label-bg x=0 y=0 rx=10 ry=10 width=140 height=26rect
+                text x=10 y=13Riyadh（利雅得）text
+              g
+            g
+
+            !-- Jeddah --
+            g class=pin id=pin-jeddah transform=translate(310,360)
+              circle class=ring r=10circle
+              circle class=core r=7circle
+              g transform=translate(14,-18)
+                rect class=label-bg x=0 y=0 rx=10 ry=10 width=140 height=26rect
+                text x=10 y=13Jeddah（吉达）text
+              g
+            g
+
+            !-- decorative glow dots --
+            circle cx=430 cy=190 r=2.2 fill=rgba(255,255,255,.35)
+            circle cx=380 cy=420 r=2.2 fill=rgba(255,255,255,.35)
+            circle cx=560 cy=430 r=2.2 fill=rgba(255,255,255,.35)
+          svg
+
+          div class=hint
+            span class=kbd点击右侧企业span
+            span或等待自动轮播点亮span
+          div
+
+          div class=legend
+            div class=legend-rowspan class=dotspanspan企业所在地（城市点）spandiv
+            div class=legend-rowspan class=dot greenspanspan当前点亮企业spandiv
+          div
+        div
+      div
+    div
+
+    !-- Right Company List --
+    div class=panel
+      div class=header
+        div
+          h2 class=title style=font-size16px;margin0 0 6px;企业清单（可点选定位）h2
+          p class=subtitle按你给的 6+ 家基地工厂信息整理（按城市归类）p
+        div
+        div class=chips
+          div class=chipspan class=dot yellowspanspan自动巡航spandiv
+        div
+      div
+
+      div class=listPanel id=listPanel
+        div class=sectionDammam（达曼）div
+        div class=card data-city=dammam data-company=Zamil Air Conditioners
+          div
+            p class=nameZamil Air Conditionersp
+            p class=meta基地工厂：达曼（Dammam）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=card data-city=dammam data-company=ABB (Asea Brown Boveri)
+          div
+            p class=nameABB (Asea Brown Boveri)p
+            p class=meta基地工厂：达曼（Dammam）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=card data-city=dammam data-company=Daikin Airconditioning Saudi Arabia LLC
+          div
+            p class=nameDaikin Airconditioning Saudi Arabia LLCp
+            p class=meta基地工厂：达曼（Dammam）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=card data-city=dammam data-company=FAWAZ Refrigeration & Air-Conditioning Cont. Co. LLC
+          div
+            p class=nameFAWAZ Refrigeration & Air-Conditioning Cont. Co. LLCp
+            p class=meta基地工厂：达曼（Dammam）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=section style=margin-top16px;Riyadh（利雅得）div
+        div class=card data-city=riyadh data-company=Shaker Group
+          div
+            p class=nameShaker Groupp
+            p class=meta基地工厂：利雅得（Riyadh）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=section style=margin-top16px;Jeddah（吉达）div
+        div class=card data-city=jeddah data-company=Al Salem Johnson Controls (YORK)
+          div
+            p class=nameAl Salem Johnson Controls (YORK)p
+            p class=meta基地工厂：吉达（Jeddah）p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+
+        div class=card data-city=jeddah data-company=Saudi Air Conditioning Manufacturing Co. (SAMCO)
+          div
+            p class=nameSaudi Air Conditioning Manufacturing Co. (SAMCO)p
+            p class=meta基地工厂：吉达第一工业城p
+          div
+          div class=badgespan class=dotspanspanMarkerspandiv
+        div
+      div
+    div
+  div
+
+  script
+     企业数据（用于轮播点亮）
+    const companies = [
+      { name Zamil Air Conditioners, city dammam, pin pin-dammam },
+      { name ABB (Asea Brown Boveri), city dammam, pin pin-dammam },
+      { name Daikin Airconditioning Saudi Arabia LLC, city dammam, pin pin-dammam },
+      { name FAWAZ Refrigeration & Air-Conditioning Cont. Co. LLC, city dammam, pin pin-dammam },
+      { name Shaker Group, city riyadh, pin pin-riyadh },
+      { name Al Salem Johnson Controls (YORK), city jeddah, pin pin-jeddah },
+      { name Saudi Air Conditioning Manufacturing Co. (SAMCO), city jeddah, pin pin-jeddah },
+    ];
+
+    const pins = {
+      dammam document.getElementById(pin-dammam),
+      riyadh document.getElementById(pin-riyadh),
+      jeddah document.getElementById(pin-jeddah)
+    };
+
+    const cards = Array.from(document.querySelectorAll(.card));
+
+    let idx = 0;
+    let timer = null;
+    let auto = true;
+
+    function clearActive(){
+      Object.values(pins).forEach(p = p.classList.remove(active));
+      cards.forEach(c = c.classList.remove(active));
+    }
+
+    function scrollCardIntoView(card){
+      const panel = document.getElementById(listPanel);
+      const rect = card.getBoundingClientRect();
+      const prect = panel.getBoundingClientRect();
+       如果卡片不在可视区，滚动到中间
+      if(rect.top  prect.top + 10  rect.bottom  prect.bottom - 10){
+        panel.scrollTo({
+          top panel.scrollTop + (rect.top - prect.top) - (prect.height2 - rect.height2),
+          behavior smooth
+        });
+      }
+    }
+
+    function highlight(companyName, city){
+      clearActive();
+
+      const pin = pins[city];
+      if(pin) pin.classList.add(active);
+
+      const card = cards.find(c = c.dataset.company === companyName);
+      if(card){
+        card.classList.add(active);
+        scrollCardIntoView(card);
+      }
+    }
+
+    function next(){
+      const item = companies[idx % companies.length];
+      highlight(item.name, item.city);
+      idx++;
+    }
+
+    function start(){
+      stop();
+      timer = setInterval(() = {
+        if(auto) next();
+      }, 1600);
+    }
+
+    function stop(){
+      if(timer) clearInterval(timer);
+      timer = null;
+    }
+
+     点击卡片：立即高亮并暂停自动轮播 6 秒
+    cards.forEach(card = {
+      card.addEventListener(click, () = {
+        const city = card.dataset.city;
+        const name = card.dataset.company;
+        highlight(name, city);
+
+        auto = false;
+         6 秒后恢复自动轮播
+        setTimeout(() = { auto = true; }, 6000);
+      });
+    });
+
+     初始点亮
+    highlight(companies[0].name, companies[0].city);
+    idx = 1;
+    start();
+
+     可选：按空格暂停继续
+    window.addEventListener(keydown, (e) = {
+      if(e.code === Space){
+        e.preventDefault();
+        auto = !auto;
+        if(auto) next();
+      }
+    });
+  script
+body
+html
